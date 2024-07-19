@@ -427,7 +427,7 @@ bool openxr_init() {
 			sys_info->overlay_app = true;
 		}
 		else {
-			if (VarjoSupport::Init(settings->overlay_priority))
+			if (varjoSupportInit(settings->overlay_priority))
 			{
 				sys_info->overlay_app = true;
 			}

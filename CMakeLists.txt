@@ -432,6 +432,10 @@ set(SK_SRC_UI
   StereoKitC/ui/ui_theming.h
   StereoKitC/ui/ui_theming.cpp )
 
+set(SK_SRC_VARJO
+  StereoKitC/varjo/VarjoSupport.h
+  StereoKitC/varjo/VarjoSupport.cpp )
+
 # Switch between a static or shared library based on
 # the cmake options provided.
 if (SK_BUILD_SHARED_LIBS)
@@ -451,7 +455,8 @@ add_library(StereoKitC ${LIBRARY_TYPE}
   ${SK_SRC_XR_BACKENDS}
   ${SK_SRC_TOOLS}
   ${SK_SRC_UI}
-  ${SK_SRC_SHADERS_H} )
+  ${SK_SRC_SHADERS_H}
+  ${SK_SRC_VARJO})
 
 # Set up Visual Studio folders/filters for a more organized
 # workspace there.
@@ -466,6 +471,7 @@ source_group("xr_backends"     FILES ${SK_SRC_XR_BACKENDS})
 source_group("tools"           FILES ${SK_SRC_TOOLS})
 source_group("ui"              FILES ${SK_SRC_UI})
 source_group("shaders_builtin" FILES ${SK_SRC_SHADERS_H})
+source_group("varjo"           FILES ${SK_SRC_VARJO})
 
 if (NOT MSVC)
   # DirectXMath on non-msvc compilers needs a few extra files

@@ -1,19 +1,9 @@
 #pragma once
 
-#ifdef __cplusplus
+#include <stdint.h>
+
 namespace sk {
-#endif
 
-	class VarjoSupport
-	{
-	private:
+	bool varjoSupportInit(uint32_t priority);
 
-	public:
-
-		static bool Init(uint32_t priority);
-
-	};
-
-#ifdef __cplusplus
 } // namespace sk
-#endif
