@@ -73,7 +73,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>reactphysics3d.lib;openxr_loader.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;windowsapp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Varjo-SDK\lib\VarjoLib.lib;reactphysics3d.lib;openxr_loader.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;windowsapp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -114,6 +114,9 @@ xcopy "$(ProjectDir)stereokit_ui.h" "$(ProjectDir)..\bin\distribute\include\" /d
 "$(ProjectDir)..\tools\skshaderc.exe" -O3 $(SKShaderDebugFlag) -h -z -t x -i "$(ProjectDir)..\tools\include" -o "$(IntermediateOutputPath)shaders" "$(ProjectDir)shaders_builtin\*.hlsl"</Command>
       <Message>Checking project dependencies and compiling shaders.</Message>
     </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalOptions) /external:I "$(ProjectDir)Varjo-SDK/include"</AdditionalOptions>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="asset_types\anchor.cpp" />
@@ -188,6 +191,7 @@ xcopy "$(ProjectDir)stereokit_ui.h" "$(ProjectDir)..\bin\distribute\include\" /d
     <ClCompile Include="ui\ui_theming.cpp" />
     <ClCompile Include="utils\random.cpp" />
     <ClCompile Include="utils\sdf.cpp" />
+    <ClCompile Include="varjo\VarjoSupport.cpp" />
     <ClCompile Include="xr_backends\offscreen.cpp" />
     <ClCompile Include="xr_backends\openxr.cpp" />
     <ClCompile Include="xr_backends\anchor_openxr_msft.cpp" />
@@ -276,6 +280,7 @@ xcopy "$(ProjectDir)stereokit_ui.h" "$(ProjectDir)..\bin\distribute\include\" /d
     <ClInclude Include="ui\ui_theming.h" />
     <ClInclude Include="utils\random.h" />
     <ClInclude Include="utils\sdf.h" />
+    <ClInclude Include="varjo\VarjoSupport.h" />
     <ClInclude Include="xr_backends\offscreen.h" />
     <ClInclude Include="xr_backends\openxr.h" />
     <ClInclude Include="xr_backends\anchor_openxr_msft.h" />

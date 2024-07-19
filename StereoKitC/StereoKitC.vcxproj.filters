@@ -247,6 +247,9 @@
     <ClCompile Include="systems\render_pipeline.cpp">
       <Filter>systems</Filter>
     </ClCompile>
+    <ClCompile Include="varjo\VarjoSupport.cpp">
+      <Filter>varjo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stereokit.h" />
@@ -514,6 +517,9 @@
     <ClInclude Include="systems\render_pipeline.h">
       <Filter>systems</Filter>
     </ClInclude>
+    <ClInclude Include="varjo\VarjoSupport.h">
+      <Filter>varjo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -548,6 +554,9 @@
     </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{cc487034-d7b8-48bc-85ed-fba2b844bd5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="varjo">
+      <UniqueIdentifier>{f48f4d50-4413-4bd8-be52-a4b9437dcd58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

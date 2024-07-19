@@ -36,6 +36,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "../varjo/VarjoSupport.h"
+
 #if defined(SK_OS_ANDROID) || defined(SK_OS_LINUX)
 #include <time.h>
 #endif
@@ -418,11 +420,20 @@ bool openxr_init() {
 	session_info.systemId = xr_system_id;
 	XrSessionCreateInfoOverlayEXTX overlay_info = {XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX};
 	const sk_settings_t *settings = sk_get_settings_ref();
-	if (xr_ext_available.EXTX_overlay && settings->overlay_app) {
-		overlay_info.sessionLayersPlacement = settings->overlay_priority;
-		gfx_binding.next = &overlay_info;
-		sys_info->overlay_app = true;
+	if (settings->overlay_app) {
+		if (xr_ext_available.EXTX_overlay) {
+			overlay_info.sessionLayersPlacement = settings->overlay_priority;
+			gfx_binding.next = &overlay_info;
+			sys_info->overlay_app = true;
+		}
+		else {
+			if (VarjoSupport::Init(settings->overlay_priority))
+			{
+				sys_info->overlay_app = true;
+			}
+		}
 	}
+
 	XrResult result = xrCreateSession(xr_instance, &session_info, &xr_session);
 
 	// Unable to start a session, may not have an MR device attached or ready
