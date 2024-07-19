@@ -433,7 +433,6 @@ set(SK_SRC_UI
   StereoKitC/ui/ui_theming.cpp )
 
 set(SK_SRC_VARJO
-  StereoKitC/varjo/detours.h
   StereoKitC/varjo/Utils.h
   StereoKitC/varjo/VarjoSupport.h
   StereoKitC/varjo/VarjoSupport.cpp )
