@@ -433,8 +433,22 @@ set(SK_SRC_UI
   StereoKitC/ui/ui_theming.cpp )
 
 set(SK_SRC_VARJO
+  StereoKitC/varjo/detours.cpp
+  StereoKitC/varjo/detours.h
+  StereoKitC/varjo/Utils.h
   StereoKitC/varjo/VarjoSupport.h
   StereoKitC/varjo/VarjoSupport.cpp )
+
+# Import Detours.
+set(SK_SRC_DETOURS
+	StereoKitC/Detours/src/creatwth.cpp
+	StereoKitC/Detours/src/detours.cpp
+	StereoKitC/Detours/src/disasm.cpp
+	StereoKitC/Detours/src/disolx64.cpp
+	StereoKitC/Detours/src/image.cpp
+	StereoKitC/Detours/src/modules.cpp)
+add_compile_definitions(_AMD64_)
+include_directories(StereoKitC/Detours/src)
 
 # Switch between a static or shared library based on
 # the cmake options provided.
@@ -456,7 +470,13 @@ add_library(StereoKitC ${LIBRARY_TYPE}
   ${SK_SRC_TOOLS}
   ${SK_SRC_UI}
   ${SK_SRC_SHADERS_H}
-  ${SK_SRC_VARJO})
+  ${SK_SRC_VARJO}
+  ${SK_SRC_DETOURS})
+
+# Import Varjo SDK.
+add_library(VarjoLib SHARED IMPORTED)
+set_property(TARGET VarjoLib PROPERTY IMPORTED_IMPLIB ${CMAKE_CURRENT_SOURCE_DIR}/StereoKitC/Varjo-SDK/lib/VarjoLib.lib)
+set_property(TARGET VarjoLib APPEND PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR}/StereoKitC/Varjo-SDK/include)
 
 # Set up Visual Studio folders/filters for a more organized
 # workspace there.
@@ -472,6 +492,7 @@ source_group("tools"           FILES ${SK_SRC_TOOLS})
 source_group("ui"              FILES ${SK_SRC_UI})
 source_group("shaders_builtin" FILES ${SK_SRC_SHADERS_H})
 source_group("varjo"           FILES ${SK_SRC_VARJO})
+source_group("detours"         FILES ${SK_SRC_DETOURS})
 
 if (NOT MSVC)
   # DirectXMath on non-msvc compilers needs a few extra files
@@ -516,6 +537,11 @@ target_link_libraries( StereoKitC
     ${CMAKE_DL_LIBS}
   PUBLIC
     ${ANDROID_LIBS}
+)
+
+# Link to dependencies
+target_link_libraries(StereoKitC
+  PRIVATE VarjoLib
 )
 
 # Compiler options for all the targets, now that they're all present

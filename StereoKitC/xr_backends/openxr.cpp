@@ -36,7 +36,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../varjo/VarjoSupport.h"
+#include <varjo/VarjoSupport.h>
 
 #if defined(SK_OS_ANDROID) || defined(SK_OS_LINUX)
 #include <time.h>
