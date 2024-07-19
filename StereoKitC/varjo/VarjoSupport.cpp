@@ -9,10 +9,13 @@
 
 namespace sk {
 
+    uint32_t _sessionPriority;
+
     // Hook the Varjo SDK (used by the OpenXR runtime) to keep the session as an overlay.
     void (*original_varjo_WaitSync)(struct varjo_Session* session, struct varjo_FrameInfo* frameInfo) = nullptr;
     void hooked_varjo_WaitSync(struct varjo_Session* session, struct varjo_FrameInfo* frameInfo) {
-        varjo_SessionSetPriority(session, 1000);
+        
+        varjo_SessionSetPriority(session, _sessionPriority);
 
         return original_varjo_WaitSync(session, frameInfo);
     }
@@ -21,11 +24,13 @@ namespace sk {
         return false;
     }
 
-    bool varjoSupportInit(uint32_t priority) {
+    bool varjoSupportInit(uint32_t sessionPriority) {
 
         bool isVarjo = detectVarjoEnvironment();
         if (isVarjo)
         {
+            _sessionPriority = sessionPriority;
+
             // Hook the Varjo runtime to force overlay mode.
             const std::filesystem::path varjoLib =
                 std::filesystem::path(Utils::RegGetString(HKEY_LOCAL_MACHINE, "SOFTWARE\\Varjo\\Runtime", "InstallDir")
