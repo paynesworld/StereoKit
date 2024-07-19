@@ -363,3 +363,15 @@ build_*/
 .deps_cache/
 
 **.DS_Store**
+
+# cmake-generated output
+_deps/
+CMakeFiles/
+shaders/
+CPM_modules/
+*.vcxproj*
+cmake_install.cmake
+cmake/CPM_0.32.2.cmake
+CMakeCache.txt
+cpm-package-lock.cmake
+source_link.json
