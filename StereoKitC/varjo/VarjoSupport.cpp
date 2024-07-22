@@ -21,10 +21,12 @@ namespace sk {
     }
     
     bool detectVarjoEnvironment() {
-        return false;
+        return true;
     }
 
     bool varjoSupportInit(uint32_t sessionPriority) {
+
+        log_diagf("<~cyn>SHP<~clr> varjoSupportInit");
 
         bool isVarjo = detectVarjoEnvironment();
         if (isVarjo)

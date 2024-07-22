@@ -4,6 +4,7 @@
 #include <string>
 #include <wtypes.h>
 #include "detours.h"
+#include "stereokit.h"
 
 namespace Utils {
 
@@ -13,6 +14,8 @@ namespace Utils {
             // Already hooked.
             return;
         }
+
+        sk::log_diagf("<~cyn>SHP<~clr> DetourDllAttach 1");
 
         HMODULE handle;
         GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_PIN, dll, &handle);
