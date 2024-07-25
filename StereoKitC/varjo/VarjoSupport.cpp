@@ -15,6 +15,8 @@ namespace sk {
     void (*original_varjo_WaitSync)(struct varjo_Session* session, struct varjo_FrameInfo* frameInfo) = nullptr;
     void hooked_varjo_WaitSync(struct varjo_Session* session, struct varjo_FrameInfo* frameInfo) {
         
+        //log_diagf("<~cyn>SHP<~clr> hooked_varjo_WaitSync %i", _sessionPriority);
+
         varjo_SessionSetPriority(session, _sessionPriority);
 
         return original_varjo_WaitSync(session, frameInfo);
@@ -26,7 +28,7 @@ namespace sk {
 
     bool varjoSupportInit(uint32_t sessionPriority) {
 
-        log_diagf("<~cyn>SHP<~clr> varjoSupportInit");
+        log_diagf("<~cyn>SHP<~clr> varjoSupportInit %i", sessionPriority);
 
         bool isVarjo = detectVarjoEnvironment();
         if (isVarjo)

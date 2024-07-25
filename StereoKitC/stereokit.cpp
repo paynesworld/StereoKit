@@ -136,7 +136,7 @@ bool32_t sk_init(sk_settings_t settings) {
 	system_t sys_platform_begin   = { "FrameBegin"  };
 	system_t sys_platform_render  = { "FrameRender" };
 
-	system_set_step_deps(sys_platform_render, "App", "Text", "Sprites", "Lines", "World", "UILate", "Animation");
+	system_set_step_deps(sys_platform_render, "App");// , "Text", "Sprites", "Lines", "World", "UILate", "Animation");
 
 	sys_platform       .func_initialize = platform_init;
 	sys_platform       .func_shutdown   = platform_shutdown;
